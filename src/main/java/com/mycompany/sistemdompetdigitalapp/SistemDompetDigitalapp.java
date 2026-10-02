@@ -9,9 +9,9 @@ public class SistemDompetDigitalapp {
         DompetDigital[] daftarRiwayat = new DompetDigital[100];
         int jumlahTransaksi = 0;
 
-        System.out.println("===========================================");
+        System.out.println("=============================================");
         System.out.println("    APLIKASI MINI Dompet Digital E-WALLET    ");
-        System.out.println("===========================================");
+        System.out.println("=============================================");
         
         System.out.print("Masukkan Nama Anda     : ");
         String namaInput = scanner.nextLine();
@@ -116,12 +116,12 @@ public class SistemDompetDigitalapp {
                         if (subPilih == 1) {
                             System.out.print("Masukkan ID (cth: TRX-UP-1): ");
                             String idCari = scanner.nextLine();
-                            DompetDigital.cariTransaksi(daftarRiwayat, jumlahTransaksi, idCari); // Memanggil overloading 1
+                            DompetDigital.cariTransaksi(daftarRiwayat, jumlahTransaksi, idCari); 
                         } else if (subPilih == 2) {
                             System.out.print("Masukkan indeks (0 s.d " + (jumlahTransaksi - 1) + "): ");
                             int idxCari = scanner.nextInt();
                             scanner.nextLine();
-                            DompetDigital.cariTransaksi(daftarRiwayat, jumlahTransaksi, idxCari); // Memanggil overloading 2
+                            DompetDigital.cariTransaksi(daftarRiwayat, jumlahTransaksi, idxCari); 
                         } else {
                             System.out.println("Pilihan tidak valid.");
                         }
