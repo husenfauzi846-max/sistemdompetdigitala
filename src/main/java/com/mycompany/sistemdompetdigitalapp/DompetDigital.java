@@ -23,7 +23,7 @@ public class DompetDigital {
     }
 
     public static void prosesSimulasiTransaksi(DompetDigital objekTransaksi) {
-        System.out.println("\n[SIMULASI PROSES TRANSAKSI (DYNAMIC BINDING)]");
+        System.out.println("\n[SIMULASI PROSES TRANSAKSI]");
         System.out.println("Memproses objek bertipe Superclass...");
 
         objekTransaksi.tampilkanInfo();
@@ -40,6 +40,7 @@ public class DompetDigital {
                 break;
             }
         }
+        
         if (!ditemukan) {
             System.out.println("Transaksi dengan ID '" + keywordId + "' tidak ditemukan.");
         }
