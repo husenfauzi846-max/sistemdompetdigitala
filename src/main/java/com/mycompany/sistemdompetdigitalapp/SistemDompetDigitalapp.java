@@ -20,20 +20,21 @@ public class SistemDompetDigitalapp {
         String noTelpInput = scanner.nextLine();
 
         User akunUser = new User(namaInput, noTelpInput);
-        System.out.println("\nRegistrasi Berhasil! Halo, " + akunUser.getNama() + "\n");
+        System.out.println("\nRegistrasi Berhasil! Halo, " + akunUser.getNama() + " (Total User: " + User.getTotalUser() + ")\n");
         boolean isRunning = true;
         
         while (isRunning) {
             System.out.println("========================================");
             System.out.println("                MENU UTAMA              ");
             System.out.println("========================================");
-            
             System.out.println("1. Cek Profil & Saldo");
             System.out.println("2. Top-Up Saldo");
             System.out.println("3. Transfer ke Pengguna Lain");
             System.out.println("4. Lihat Riwayat Transaksi");
-            System.out.println("5. Keluar Program");
-            System.out.print("Silakan pilih menu (1-5): ");
+            System.out.println("5. Cari Transaksi Khusus (Method Overloading)");
+            System.out.println("6. Keluar Program");
+            System.out.print("Silakan pilih menu (1-6): ");
+            
             int pilihan = scanner.nextInt();
             scanner.nextLine(); 
 
@@ -94,19 +95,46 @@ public class SistemDompetDigitalapp {
                     } else {
                         for (int i = 0; i < jumlahTransaksi; i++) {
                             System.out.println("Transaksi ke-" + (i + 1) + ":");
-                            daftarRiwayat[i].tampilkanInfo();
+                            daftarRiwayat[i].tampilkanInfo(); // Dynamic Binding
                             System.out.println("----------------------------------------");
                         }
                     }
                     break;
 
                 case 5:
+                    // Demonstrasi Pemanggilan Method Overloading
+                    System.out.println("\n--- PENCARIAN TRANSAKSI (OVERLOADING) ---");
+                    if (jumlahTransaksi == 0) {
+                        System.out.println("Belum ada data transaksi.");
+                    } else {
+                        System.out.println("1. Cari Berdasarkan ID Transaksi (String)");
+                        System.out.println("2. Cari Berdasarkan Nomor Urut / Indeks (int)");
+                        System.out.print("Pilih opsi (1/2): ");
+                        int subPilih = scanner.nextInt();
+                        scanner.nextLine();
+
+                        if (subPilih == 1) {
+                            System.out.print("Masukkan ID (cth: TRX-UP-1): ");
+                            String idCari = scanner.nextLine();
+                            DompetDigital.cariTransaksi(daftarRiwayat, jumlahTransaksi, idCari); // Memanggil overloading 1
+                        } else if (subPilih == 2) {
+                            System.out.print("Masukkan indeks (0 s.d " + (jumlahTransaksi - 1) + "): ");
+                            int idxCari = scanner.nextInt();
+                            scanner.nextLine();
+                            DompetDigital.cariTransaksi(daftarRiwayat, jumlahTransaksi, idxCari); // Memanggil overloading 2
+                        } else {
+                            System.out.println("Pilihan tidak valid.");
+                        }
+                    }
+                    break;
+
+                case 6:
                     isRunning = false;
                     System.out.println("Terima kasih telah menggunakan aplikasi E-Wallet!");
                     break;
 
                 default:
-                    System.out.println("Pilihan tidak valid! Masukkan angka 1 sampai 5.");
+                    System.out.println("Pilihan tidak valid! Masukkan angka 1 sampai 6.");
             }
             System.out.println();
         }
