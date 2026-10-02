@@ -2,6 +2,7 @@ package com.mycompany.sistemdompetdigitalapp;
 
 import java.util.Scanner;
 
+
 public class SistemDompetDigitalapp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -9,9 +10,9 @@ public class SistemDompetDigitalapp {
         DompetDigital[] daftarRiwayat = new DompetDigital[100];
         int jumlahTransaksi = 0;
 
-        System.out.println("===========================================");
-        System.out.println("    APLIKASI MINI Dompet Digital E-WALLET    ");
-        System.out.println("===========================================");
+        System.out.println("=============================================");
+        System.out.println("    APLIKASI Dompet Digital E-WALLET    ");
+        System.out.println("=============================================");
         
         System.out.print("Masukkan Nama Anda     : ");
         String namaInput = scanner.nextLine();
@@ -20,28 +21,32 @@ public class SistemDompetDigitalapp {
         String noTelpInput = scanner.nextLine();
 
         User akunUser = new User(namaInput, noTelpInput);
-        System.out.println("\nRegistrasi Berhasil! Halo, " + akunUser.getNama() + " (Total User: " + User.getTotalUser() + ")\n");
+        System.out.println("\nRegistrasi Berhasil! Halo, " + akunUser.getNama()
+                + " (Total User: " + User.getTotalUser() + ")\n");
         boolean isRunning = true;
         
         while (isRunning) {
             System.out.println("========================================");
             System.out.println("                MENU UTAMA              ");
             System.out.println("========================================");
+            
             System.out.println("1. Cek Profil & Saldo");
-            System.out.println("2. Top-Up Saldo (Subclass 1)");
+            System.out.println("2. Top-Up Saldo ");
             System.out.println("3. Transfer ke Pengguna Lain");
             System.out.println("4. Bayar Tagihan / Listrik ");
             System.out.println("5. Lihat Riwayat Transaksi ");
             System.out.println("6. Simulasi Proses Transaksi Khusus");
-            System.out.println("7. Cari Transaksi ");
+            System.out.println("7. Riwayat Transaksi ");
             System.out.println("8. Keluar Program");
             System.out.print("Silakan pilih menu (1-8): ");
+            
             
             if (!scanner.hasNextInt()) {
                 System.out.println("Input harus berupa angka!");
                 scanner.nextLine();
                 continue;
             }
+            
             int pilihan = scanner.nextInt();
             scanner.nextLine(); 
 
@@ -58,6 +63,7 @@ public class SistemDompetDigitalapp {
                         System.out.print("\nMasukkan Nominal Top-Up: Rp");
                         double jmlTopUp = scanner.nextDouble();
                         scanner.nextLine();
+                        
                         System.out.print("Pilih Metode Bank (Bank / E-Wallet): ");
                         String metode = scanner.nextLine();
 
@@ -101,7 +107,8 @@ public class SistemDompetDigitalapp {
 
                         if (akunUser.getSaldo() >= jmlTagihan) {
                             akunUser.kurangiSaldo(jmlTagihan);
-                            daftarRiwayat[jumlahTransaksi] = new PembayaranTagihan("TRX-PG-" + (jumlahTransaksi + 1), jmlTagihan, jenis);
+                            daftarRiwayat[jumlahTransaksi] = new PembayaranTagihan("TRX-PG-" 
+                                    + (jumlahTransaksi + 1), jmlTagihan, jenis);
                             jumlahTransaksi++;
                             System.out.println("Pembayaran tagihan " + jenis + " berhasil!");
                         } else {
@@ -113,7 +120,7 @@ public class SistemDompetDigitalapp {
                     break;
 
                 case 5:
-                    System.out.println("\n--- DAFTAR RIWAYAT TRANSAKSI (DYNAMIC BINDING) ---");
+                    System.out.println("\n--- DAFTAR RIWAYAT TRANSAKSI  ---");
                     if (jumlahTransaksi == 0) {
                         System.out.println("Belum ada riwayat transaksi yang tercatat.");
                     } else {
@@ -146,9 +153,10 @@ public class SistemDompetDigitalapp {
                     if (jumlahTransaksi == 0) {
                         System.out.println("Belum ada data transaksi.");
                     } else {
-                        System.out.println("1. Cari Berdasarkan ID Transaksi (String)");
-                        System.out.println("2. Cari Berdasarkan Nomor Urut / Indeks (int)");
+                        System.out.println("1. Cari Berdasarkan ID Transaksi ");
+                        System.out.println("2. Cari Berdasarkan Nomor Urut / Indek ");
                         System.out.print("Pilih opsi (1/2): ");
+                        
                         int subPilih = scanner.nextInt();
                         scanner.nextLine();
 
