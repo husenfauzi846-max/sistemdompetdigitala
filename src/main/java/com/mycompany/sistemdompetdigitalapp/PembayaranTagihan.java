@@ -1,7 +1,7 @@
 package com.mycompany.sistemdompetdigitalapp;
 
 public class PembayaranTagihan extends DompetDigital {
-    private String jenisTagihan; // Contoh: Listrik, PDAM, Internet
+    private String jenisTagihan; 
 
     public PembayaranTagihan(String idTransaksi, double nominal, String jenisTagihan) {
         super(idTransaksi, nominal);
