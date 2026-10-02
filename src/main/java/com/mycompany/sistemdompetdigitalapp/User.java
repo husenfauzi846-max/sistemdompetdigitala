@@ -13,12 +13,25 @@ public class User {
         totalUser++; 
     }
 
-    public String getNama() { return nama; }
-    public String getNomorTelepon() { return nomorTelepon; }
-    public double getSaldo() { return saldo; }
+    public String getNama() {
+        return nama;
+    }
+    
+    public String getNomorTelepon() {
+        return nomorTelepon;
+    }
+    
+    public double getSaldo() {
+        return saldo;
+    }
 
-    public void tambahSaldo(double jumlah) { this.saldo += jumlah; }
-    public void kurangiSaldo(double jumlah) { this.saldo -= jumlah; }
+    public void tambahSaldo(double jumlah) { 
+        this.saldo += jumlah; 
+    }
+    
+    public void kurangiSaldo(double jumlah) { 
+        this.saldo -= jumlah;
+    }
 
     public static int getTotalUser() {
         return totalUser;
