@@ -6,12 +6,13 @@ public class SistemDompetDigitalapp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
+        // Superclass Reference Array (Mampu menampung TopUp, Transfer, dan PembayaranTagihan)
         DompetDigital[] daftarRiwayat = new DompetDigital[100];
         int jumlahTransaksi = 0;
 
-        System.out.println("=============================================");
+        System.out.println("===========================================");
         System.out.println("    APLIKASI MINI Dompet Digital E-WALLET    ");
-        System.out.println("=============================================");
+        System.out.println("===========================================");
         
         System.out.print("Masukkan Nama Anda     : ");
         String namaInput = scanner.nextLine();
@@ -28,13 +29,20 @@ public class SistemDompetDigitalapp {
             System.out.println("                MENU UTAMA              ");
             System.out.println("========================================");
             System.out.println("1. Cek Profil & Saldo");
-            System.out.println("2. Top-Up Saldo");
-            System.out.println("3. Transfer ke Pengguna Lain");
-            System.out.println("4. Lihat Riwayat Transaksi");
-            System.out.println("5. Cari Transaksi Khusus (Method Overloading)");
-            System.out.println("6. Keluar Program");
-            System.out.print("Silakan pilih menu (1-6): ");
+            System.out.println("2. Top-Up Saldo (Subclass 1)");
+            System.out.println("3. Transfer ke Pengguna Lain (Subclass 2)");
+            System.out.println("4. Bayar Tagihan / Listrik (Subclass 3 Baru)");
+            System.out.println("5. Lihat Riwayat Transaksi (Dynamic Binding)");
+            System.out.println("6. Simulasi Proses Transaksi Khusus (Parameter Superclass)");
+            System.out.println("7. Cari Transaksi (Method Overloading)");
+            System.out.println("8. Keluar Program");
+            System.out.print("Silakan pilih menu (1-8): ");
             
+            if (!scanner.hasNextInt()) {
+                System.out.println("Input harus berupa angka!");
+                scanner.nextLine();
+                continue;
+            }
             int pilihan = scanner.nextInt();
             scanner.nextLine(); 
 
@@ -43,7 +51,7 @@ public class SistemDompetDigitalapp {
                     System.out.println("\n--- INFORMASI PROFIL & SALDO ---");
                     System.out.println("Nama Lengkap  : " + akunUser.getNama());
                     System.out.println("Nomor Telepon : " + akunUser.getNomorTelepon());
-                    System.out.println("Saldo Dompet  : Rp" + akunUser.getSaldo());
+                    System.out.printf("Saldo Dompet  : Rp %,.2f\n", akunUser.getSaldo());
                     break;
 
                 case 2:
@@ -55,13 +63,11 @@ public class SistemDompetDigitalapp {
                         String metode = scanner.nextLine();
 
                         akunUser.tambahSaldo(jmlTopUp);
-                        
                         daftarRiwayat[jumlahTransaksi] = new TopUp("TRX-UP-" + (jumlahTransaksi + 1), jmlTopUp, metode);
                         jumlahTransaksi++;
-                        
-                        System.out.println("Top-Up berhasil! Saldo Anda telah bertambah.");
+                        System.out.println("Top-Up berhasil! Saldo Anda bertambah.");
                     } else {
-                        System.out.println("Kapasitas riwayat transaksi penuh!");
+                        System.out.println("Kapasitas riwayat penuh!");
                     }
                     break;
 
@@ -75,35 +81,72 @@ public class SistemDompetDigitalapp {
 
                         if (akunUser.getSaldo() >= jmlTransfer) {
                             akunUser.kurangiSaldo(jmlTransfer);
-                            
                             daftarRiwayat[jumlahTransaksi] = new Transfer("TRX-TF-" + (jumlahTransaksi + 1), jmlTransfer, tujuan);
                             jumlahTransaksi++;
-                            
                             System.out.println("Transfer berhasil dikirim ke " + tujuan);
                         } else {
-                            System.out.println("Transaksi Gagal! Saldo Anda tidak mencukupi.");
+                            System.out.println("Transaksi Gagal! Saldo tidak mencukupi.");
                         }
                     } else {
-                        System.out.println("Kapasitas riwayat transaksi penuh!");
+                        System.out.println("Kapasitas riwayat penuh!");
                     }
                     break;
 
                 case 4:
-                    System.out.println("\n--- DAFTAR RIWAYAT TRANSAKSI ---");
+                    if (jumlahTransaksi < daftarRiwayat.length) {
+                        System.out.print("\nMasukkan Nominal Tagihan: Rp");
+                        double jmlTagihan = scanner.nextDouble();
+                        scanner.nextLine();
+                        System.out.print("Masukkan Jenis Tagihan (Listrik/PDAM/Internet): ");
+                        String jenis = scanner.nextLine();
+
+                        if (akunUser.getSaldo() >= jmlTagihan) {
+                            akunUser.kurangiSaldo(jmlTagihan);
+                            daftarRiwayat[jumlahTransaksi] = new PembayaranTagihan("TRX-PG-" + (jumlahTransaksi + 1), jmlTagihan, jenis);
+                            jumlahTransaksi++;
+                            System.out.println("Pembayaran tagihan " + jenis + " berhasil!");
+                        } else {
+                            System.out.println("Transaksi Gagal! Saldo tidak mencukupi.");
+                        }
+                    } else {
+                        System.out.println("Kapasitas riwayat penuh!");
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("\n--- DAFTAR RIWAYAT TRANSAKSI (DYNAMIC BINDING) ---");
                     if (jumlahTransaksi == 0) {
                         System.out.println("Belum ada riwayat transaksi yang tercatat.");
                     } else {
                         for (int i = 0; i < jumlahTransaksi; i++) {
                             System.out.println("Transaksi ke-" + (i + 1) + ":");
-                            daftarRiwayat[i].tampilkanInfo(); // Dynamic Binding
+                            // Runtime Polymorphism & Dynamic Binding:
+                            // Pemanggilan method override berdasarkan wujud asli objek saat runtime
+                            daftarRiwayat[i].tampilkanInfo(); 
                             System.out.println("----------------------------------------");
                         }
                     }
                     break;
 
-                case 5:
-                    // Demonstrasi Pemanggilan Method Overloading
-                    System.out.println("\n--- PENCARIAN TRANSAKSI (OVERLOADING) ---");
+                case 6:
+                    System.out.println("\n--- SIMULASI PROSES TRANSAKSI KHUSUS ---");
+                    if (jumlahTransaksi == 0) {
+                        System.out.println("Belum ada transaksi untuk disimulasikan.");
+                    } else {
+                        System.out.print("Pilih nomor urut transaksi (1 s.d " + jumlahTransaksi + "): ");
+                        int idx = scanner.nextInt();
+                        scanner.nextLine();
+                        if (idx >= 1 && idx <= jumlahTransaksi) {
+                            // Mengirim objek subclass ke method berparameter superclass (Upcasting)
+                            DompetDigital.prosesSimulasiTransaksi(daftarRiwayat[idx - 1]);
+                        } else {
+                            System.out.println("Nomor transaksi tidak valid.");
+                        }
+                    }
+                    break;
+
+                case 7:
+                    System.out.println("\n--- PENCARIAN TRANSAKSI (METHOD OVERLOADING) ---");
                     if (jumlahTransaksi == 0) {
                         System.out.println("Belum ada data transaksi.");
                     } else {
@@ -116,25 +159,25 @@ public class SistemDompetDigitalapp {
                         if (subPilih == 1) {
                             System.out.print("Masukkan ID (cth: TRX-UP-1): ");
                             String idCari = scanner.nextLine();
-                            DompetDigital.cariTransaksi(daftarRiwayat, jumlahTransaksi, idCari); 
+                            DompetDigital.cariTransaksi(daftarRiwayat, jumlahTransaksi, idCari);
                         } else if (subPilih == 2) {
                             System.out.print("Masukkan indeks (0 s.d " + (jumlahTransaksi - 1) + "): ");
                             int idxCari = scanner.nextInt();
                             scanner.nextLine();
-                            DompetDigital.cariTransaksi(daftarRiwayat, jumlahTransaksi, idxCari); 
+                            DompetDigital.cariTransaksi(daftarRiwayat, jumlahTransaksi, idxCari);
                         } else {
                             System.out.println("Pilihan tidak valid.");
                         }
                     }
                     break;
 
-                case 6:
+                case 8:
                     isRunning = false;
                     System.out.println("Terima kasih telah menggunakan aplikasi E-Wallet!");
                     break;
 
                 default:
-                    System.out.println("Pilihan tidak valid! Masukkan angka 1 sampai 6.");
+                    System.out.println("Pilihan tidak valid! Masukkan angka 1 sampai 8.");
             }
             System.out.println();
         }
