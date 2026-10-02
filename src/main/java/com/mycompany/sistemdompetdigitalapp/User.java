@@ -6,7 +6,6 @@ public class User {
     private double saldo;
     private static int totalUser = 0;
 
-    
     public User(String nama, String nomorTelepon) {
         this.nama = nama;
         this.nomorTelepon = nomorTelepon;
