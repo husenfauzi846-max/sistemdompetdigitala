@@ -8,11 +8,15 @@ public class Transfer extends DompetDigital {
         this.tujuan = tujuan;
     }
 
+    public String getTujuan() {
+        return tujuan;
+    }
+
     @Override
     public void tampilkanInfo() {
         System.out.println("[JENIS TRANSAKSI : TRANSFER DANA]");
         System.out.println("ID Transaksi     : " + getIdTransaksi()); 
         System.out.println("Penerima Tujuan  : " + tujuan);
-        System.out.println("Jumlah Transfer  : Rp" + getNominal());
+        System.out.printf("Jumlah Transfer  : Rp %,.2f\n", getNominal());
     }
 }
