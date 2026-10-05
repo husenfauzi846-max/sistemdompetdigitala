@@ -30,10 +30,10 @@ public class SistemDompetDigitalapp {
             System.out.println("1. Cek Profil & Saldo");
             System.out.println("2. Top-Up Saldo");
             System.out.println("3. Transfer ke Pengguna Lain");
-            System.out.println("4. Bayar Tagihan ");
-            System.out.println("5. Lihat Riwayat Transaksi ");
-            System.out.println("6. cetak struk Transaksi ");
-            System.out.println("7. Pencarian Transaksi ");
+            System.out.println("4. Bayar Tagihan");
+            System.out.println("5. Lihat Riwayat Transaksi");
+            System.out.println("6. Cetak Struk Transaksi");
+            System.out.println("7. Pencarian Transaksi");
             System.out.println("8. Keluar Program");
             System.out.print("Silakan pilih menu (1-8): ");
             
@@ -80,7 +80,7 @@ public class SistemDompetDigitalapp {
                         String tujuan = scanner.nextLine();
 
                         if (akunUser.getSaldo() >= jmlTransfer) {
-                            akunUser.kurangiSaldo(jmlTransfer);                          
+                            akunUser.kurangiSaldo(jmlTransfer);                         
                             daftarRiwayat[jumlahTransaksi] = new Transfer("TRX-TF-" + (jumlahTransaksi + 1), jmlTransfer, tujuan);
                             jumlahTransaksi++;
                             System.out.println("Transfer berhasil dikirim ke " + tujuan);
@@ -127,15 +127,15 @@ public class SistemDompetDigitalapp {
                     break;
 
                 case 6:
-                    System.out.println("\n--- CETAK STRUK TRANSAKSI  ---");
+                    System.out.println("\n--- CETAK STRUK TRANSAKSI ---");
                     if (jumlahTransaksi == 0) {
-                        System.out.println("Belum ada Struk transaksi .");
+                        System.out.println("Belum ada transaksi.");
                     } else {
                         System.out.print("Pilih nomor urut transaksi (1 s.d " + jumlahTransaksi + "): ");
                         int idx = scanner.nextInt();
                         scanner.nextLine();
                         if (idx >= 1 && idx <= jumlahTransaksi) {  
-                            DompetDigital.prosesSimulasiTransaksi(daftarRiwayat[idx - 1]);
+                            DompetDigital.cetakStrukTransaksi(daftarRiwayat[idx - 1]);
                         } else {
                             System.out.println("Nomor transaksi tidak valid.");
                         }
@@ -143,12 +143,12 @@ public class SistemDompetDigitalapp {
                     break;
 
                 case 7:
-                    System.out.println("\n--- PENCARIAN TRANSAKSI  ---");
+                    System.out.println("\n--- PENCARIAN TRANSAKSI ---");
                     if (jumlahTransaksi == 0) {
                         System.out.println("Belum ada data transaksi.");
                     } else {
-                        System.out.println("1. Cari Berdasarkan ID Transaksi ");
-                        System.out.println("2. Cari Berdasarkan Nomor Indeks ");
+                        System.out.println("1. Cari Berdasarkan ID Transaksi");
+                        System.out.println("2. Cari Berdasarkan Nomor Indeks");
                         System.out.print("Pilih opsi (1/2): ");
                         int subPilih = scanner.nextInt();
                         scanner.nextLine();

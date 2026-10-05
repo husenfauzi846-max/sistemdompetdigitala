@@ -28,7 +28,7 @@ public class DompetDigital {
         System.out.println("==========================================");
         objekTransaksi.tampilkanInfo(); 
         System.out.println("Status  : BERHASIL & VALID");
-        System.out.println("------------------------------------------");
+        System.out.println("==========================================");
     }
 
     public static void cariTransaksi(DompetDigital[] list, int total, String keywordId) {
