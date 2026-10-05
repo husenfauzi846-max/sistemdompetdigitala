@@ -22,14 +22,6 @@ public class DompetDigital {
         System.out.printf("Nominal      : Rp %,.2f\n", nominal);
     }
 
-    public static void prosesSimulasiTransaksi(DompetDigital objekTransaksi) {
-        System.out.println("\n[SIMULASI PROSES TRANSAKSI]");
-        System.out.println("Memproses objek bertipe Superclass...");
-
-        objekTransaksi.tampilkanInfo();
-        System.out.println("Status: Transaksi berhasil diproses oleh sistem.\n");
-    }
-
     public static void cariTransaksi(DompetDigital[] list, int total, String keywordId) {
         boolean ditemukan = false;
         for (int i = 0; i < total; i++) {
