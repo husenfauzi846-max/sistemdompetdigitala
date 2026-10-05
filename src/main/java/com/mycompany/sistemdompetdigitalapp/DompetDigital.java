@@ -22,10 +22,13 @@ public class DompetDigital {
         System.out.printf("Nominal      : Rp %,.2f\n", nominal);
     }
 
-    public static void prosesSimulasiTransaksi(DompetDigital objekTransaksi) {
-        System.out.println("\n[STRUK TRANSAKSI]");
+    public static void cetakStrukTransaksi(DompetDigital objekTransaksi) {
+        System.out.println("\n========================================");
+        System.out.println("          STRUK BUKTI TRANSAKSI           ");
+        System.out.println("==========================================");
         objekTransaksi.tampilkanInfo(); 
-        System.out.println("Status: Transaksi berhasil diproses oleh sistem.\n");
+        System.out.println("Status  : BERHASIL & VALID");
+        System.out.println("------------------------------------------");
     }
 
     public static void cariTransaksi(DompetDigital[] list, int total, String keywordId) {
