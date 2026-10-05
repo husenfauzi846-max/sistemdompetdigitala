@@ -13,7 +13,7 @@ public class TopUp extends DompetDigital {
     }
 
     @Override
-    public void tampilkanInfo() {
+    public void tampilkanInfo() { 
         System.out.println("[JENIS TRANSAKSI : TOP-UP SALDO]");
         System.out.println("ID Transaksi  : " + getIdTransaksi()); 
         System.out.println("Metode Bank   : " + metodeTopUp);
