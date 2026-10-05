@@ -13,7 +13,7 @@ public class PembayaranTagihan extends DompetDigital {
     }
 
     @Override
-    public void tampilkanInfo() {
+    public void tampilkanInfo() { 
         System.out.println("[JENIS TRANSAKSI : PEMBAYARAN TAGIHAN]");
         System.out.println("ID Transaksi     : " + getIdTransaksi());
         System.out.println("Jenis Tagihan    : " + jenisTagihan);
