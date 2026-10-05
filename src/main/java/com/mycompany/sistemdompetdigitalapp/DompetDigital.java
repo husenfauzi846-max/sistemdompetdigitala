@@ -22,6 +22,12 @@ public class DompetDigital {
         System.out.printf("Nominal      : Rp %,.2f\n", nominal);
     }
 
+    public static void prosesSimulasiTransaksi(DompetDigital objekTransaksi) {
+        System.out.println("\n[STRUK TRANSAKSI]");
+        objekTransaksi.tampilkanInfo(); 
+        System.out.println("Status: Transaksi berhasil diproses oleh sistem.\n");
+    }
+
     public static void cariTransaksi(DompetDigital[] list, int total, String keywordId) {
         boolean ditemukan = false;
         for (int i = 0; i < total; i++) {
@@ -32,7 +38,6 @@ public class DompetDigital {
                 break;
             }
         }
-        
         if (!ditemukan) {
             System.out.println("Transaksi dengan ID '" + keywordId + "' tidak ditemukan.");
         }
