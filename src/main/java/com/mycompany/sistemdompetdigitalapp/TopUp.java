@@ -1,6 +1,6 @@
 package com.mycompany.sistemdompetdigitalapp;
 
-public class TopUp extends DompetDigital {
+public class TopUp extends DompetDigital implements MendapatkanPoin {
     private String metodeTopUp;
 
     public TopUp(String idTransaksi, double nominal, String metodeTopUp) {
@@ -18,5 +18,15 @@ public class TopUp extends DompetDigital {
         System.out.println("ID Transaksi  : " + getIdTransaksi()); 
         System.out.println("Metode Bank   : " + metodeTopUp);
         System.out.printf("Jumlah Top-Up : Rp %,.2f\n", getNominal());
+    }
+    
+    @Override
+    public void prosesTransaksi() {
+        System.out.println("Top-up saldo dompet digital berhasil diproses melalui " + metodeTopUp + ".");
+    }
+
+    @Override
+    public int hitungPoinReward() {
+        return (int) (getNominal() / 10000); 
     }
 }
