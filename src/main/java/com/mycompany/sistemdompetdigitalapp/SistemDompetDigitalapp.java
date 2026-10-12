@@ -9,7 +9,7 @@ public class SistemDompetDigitalapp {
         int jumlahTransaksi = 0;
 
         System.out.println("=============================================");
-        System.out.println("    APLIKASI MINI Dompet Digital E-WALLET    ");
+        System.out.println("    APLIKASI Dompet Digital E-WALLET         ");
         System.out.println("=============================================");
         
         System.out.print("Masukkan Nama Anda     : ");
@@ -23,9 +23,10 @@ public class SistemDompetDigitalapp {
         
         boolean isRunning = true;
         
+        
         while (isRunning) {
             System.out.println("========================================");
-            System.out.println("                MENU UTAMA              ");
+            System.out.println("               MENU UTAMA               ");
             System.out.println("========================================");
             System.out.println("1. Cek Profil & Saldo");
             System.out.println("2. Top-Up Saldo");
@@ -37,6 +38,7 @@ public class SistemDompetDigitalapp {
             System.out.println("8. Keluar Program");
             System.out.print("Silakan pilih menu (1-8): ");
             
+            
             if (!scanner.hasNextInt()) {
                 System.out.println("Input harus berupa angka!");
                 scanner.nextLine();
@@ -45,6 +47,7 @@ public class SistemDompetDigitalapp {
             
             int pilihan = scanner.nextInt();
             scanner.nextLine(); 
+            
 
             switch (pilihan) {
                 case 1:
@@ -63,7 +66,13 @@ public class SistemDompetDigitalapp {
                         String metode = scanner.nextLine();
 
                         akunUser.tambahSaldo(jmlTopUp);
-                        daftarRiwayat[jumlahTransaksi] = new TopUp("TRX-UP-" + (jumlahTransaksi + 1), jmlTopUp, metode);
+                        TopUp transaksiTopUp = new TopUp("TRX-UP-" + (jumlahTransaksi + 1), jmlTopUp, metode);
+                        daftarRiwayat[jumlahTransaksi] = transaksiTopUp;
+                        
+                        // Fungsu untuk Memanggil method prosesTransaksi dari Abstract Class
+                        transaksiTopUp.prosesTransaksi();
+                        System.out.println("Poin Reward didapat: " + transaksiTopUp.hitungPoinReward() + " poin.");
+                        
                         jumlahTransaksi++;
                         System.out.println("Top-Up berhasil! Saldo Anda bertambah.");
                     } else {
@@ -80,8 +89,11 @@ public class SistemDompetDigitalapp {
                         String tujuan = scanner.nextLine();
 
                         if (akunUser.getSaldo() >= jmlTransfer) {
-                            akunUser.kurangiSaldo(jmlTransfer);                         
-                            daftarRiwayat[jumlahTransaksi] = new Transfer("TRX-TF-" + (jumlahTransaksi + 1), jmlTransfer, tujuan);
+                            akunUser.kurangiSaldo(jmlTransfer);                       
+                            Transfer transaksiTransfer = new Transfer("TRX-TF-" + (jumlahTransaksi + 1), jmlTransfer, tujuan);
+                            daftarRiwayat[jumlahTransaksi] = transaksiTransfer;
+                            
+                            transaksiTransfer.prosesTransaksi();
                             jumlahTransaksi++;
                             System.out.println("Transfer berhasil dikirim ke " + tujuan);
                         } else {
@@ -102,7 +114,22 @@ public class SistemDompetDigitalapp {
 
                         if (akunUser.getSaldo() >= jmlTagihan) {
                             akunUser.kurangiSaldo(jmlTagihan);
-                            daftarRiwayat[jumlahTransaksi] = new PembayaranTagihan("TRX-PG-" + (jumlahTransaksi + 1), jmlTagihan, jenis);
+                            PembayaranTagihan transaksiTagihan = new PembayaranTagihan("TRX-PG-" + (jumlahTransaksi + 1), jmlTagihan, jenis);
+                            daftarRiwayat[jumlahTransaksi] = transaksiTagihan;
+                            
+                            transaksiTagihan.prosesTransaksi();
+                            
+                            // fungsi penerapan method Interface DapatDicicil
+                            System.out.print("Apakah ingin disimulasikan cicilan? (y/n): ");
+                            String opsiCicil = scanner.nextLine();
+                            if (opsiCicil.equalsIgnoreCase("y")) {
+                                System.out.print("Masukkan jumlah bulan cicilan (contoh: 3 / 6 / 12): ");
+                                int bulan = scanner.nextInt();
+                                scanner.nextLine();
+                                transaksiTagihan.hitungCicilan(bulan);
+                                System.out.println("Bunga Cicilan: " + (transaksiTagihan.getBungaCicilan() * 100) + "%");
+                            }
+
                             jumlahTransaksi++;
                             System.out.println("Pembayaran tagihan " + jenis + " berhasil!");
                         } else {
