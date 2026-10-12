@@ -19,4 +19,9 @@ public class Transfer extends DompetDigital {
         System.out.println("Penerima Tujuan  : " + tujuan);
         System.out.printf("Jumlah Transfer  : Rp %,.2f\n", getNominal());
     }
+
+    @Override
+    public void prosesTransaksi() {
+        System.out.println("Transfer dana ke tujuan " + tujuan + " berhasil diproses.");
+    }
 }
