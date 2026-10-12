@@ -1,6 +1,6 @@
 package com.mycompany.sistemdompetdigitalapp;
 
-public class DompetDigital {
+public abstract class DompetDigital {
     private String idTransaksi;
     private double nominal;
 
@@ -17,6 +17,9 @@ public class DompetDigital {
         return nominal;
     }
 
+    // Abstract method wajib di-override oleh seluruh subclass
+    public abstract void prosesTransaksi();
+
     public void tampilkanInfo() {
         System.out.println("ID Transaksi : " + idTransaksi);
         System.out.printf("Nominal      : Rp %,.2f\n", nominal);
@@ -24,7 +27,7 @@ public class DompetDigital {
 
     public static void cetakStrukTransaksi(DompetDigital objekTransaksi) {
         System.out.println("\n========================================");
-        System.out.println("          STRUK BUKTI TRANSAKSI           ");
+        System.out.println("        STRUK BUKTI TRANSAKSI           ");
         System.out.println("==========================================");
         objekTransaksi.tampilkanInfo(); 
         System.out.println("Status  : BERHASIL & VALID");
